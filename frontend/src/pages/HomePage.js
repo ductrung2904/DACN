@@ -1,6 +1,6 @@
 import React from 'react';
-import Sidebar from './Sidebar';
-import Main from './Main';
+import Sidebar from '../components/Sidebar';
+import Main from '../components/Main';
 
 function HomePage() {
     return (
@@ -22,23 +22,23 @@ function HomePage() {
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
                                     <img src="https://salt.tikicdn.com/ts/banner/53/4d/24/ecd2fb88b9e0440aab44e5b617d0e564.jpg"
-                                        className="d-block w-100" alt="..." />
+                                        className="d-block w-100" alt="" />
                                 </div>
                                 <div className="carousel-item">
                                     <img src="https://salt.tikicdn.com/ts/banner/bd/71/70/3397434f4c86abc870946dcde3085b92.jpg"
-                                        className="d-block w-100" alt="..." />
+                                        className="d-block w-100" alt="" />
                                 </div>
                                 <div className="carousel-item">
                                     <img src="https://salt.tikicdn.com/ts/banner/5b/4f/c4/da3d2083b2f6815e44efcf1b4759caf1.jpg"
-                                        className="d-block w-100" alt="..." />
+                                        className="d-block w-100" alt="" />
                                 </div>
                                 <div className="carousel-item">
                                     <img src="https://salt.tikicdn.com/ts/banner/57/b8/f7/02a0693fba06aa3fe9ea91b0bef9c251.png"
-                                        className="d-block w-100" alt="..." />
+                                        className="d-block w-100" alt="" />
                                 </div>
                                 <div className="carousel-item">
                                     <img src="https://salt.tikicdn.com/ts/banner/30/4a/8c/6e1815c4113430956337bebc5804c516.jpg"
-                                        className="d-block w-100" alt="..." />
+                                        className="d-block w-100" alt="" />
                                 </div>
                             </div>
                             <a className="carousel-control-prev" href="#carouselCategory" role="button" data-bs-slide="prev">

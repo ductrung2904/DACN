@@ -10,14 +10,14 @@ app.use(cors());
 app.use(express.json());
 
 // get all book
-app.get("/nha-sach-tiki", async (req, res) => {
+app.get("/book", async (req, res) => {
     try {
         const results = await db.query("SELECT * FROM book");
         res.status(200).json({
             status: "success",
             results: results.rows.length,
             data: {
-                products: results.rows,
+                book: results.rows,
             },
         });
     } catch (err) {
@@ -26,7 +26,7 @@ app.get("/nha-sach-tiki", async (req, res) => {
 });
 
 // get a book
-app.get("/nha-sach-tiki/:id", async (req, res) => {
+app.get("/book/:id", async (req, res) => {
     // console.log(req.params.id);
 
     try {
