@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import StarRating from './StarRating';
 
 function Main() {
     const [books, setBooks] = useState([]);
@@ -12,11 +13,23 @@ function Main() {
         } catch (err) {
             console.error(err.message);
         }
-    }
+    };
 
     useEffect(() => {
         getAllBooks();
     }, []);
+
+    const renderRating = (book) => {
+        if (!book.count) {
+            return <span className="number">(0 đánh giá)</span>;
+        }
+        return (
+            <>
+                <StarRating rating={book.book_id} />
+                <span className="number">({book.count} đánh giá)</span>
+            </>
+        );
+    };
 
     console.log(books);
     return (
@@ -32,23 +45,25 @@ function Main() {
                             <p className="similar__item__name">{book.book_name}</p>
                             <div>
                                 <p className="d-inline similar__item__stars">
+                                    {/* <i className="icomoon icomoon-star"></i>
                                     <i className="icomoon icomoon-star"></i>
                                     <i className="icomoon icomoon-star"></i>
                                     <i className="icomoon icomoon-star"></i>
                                     <i className="icomoon icomoon-star"></i>
-                                    <i className="icomoon icomoon-star"></i>
-                                    <span className="number">(386 đánh giá)</span>
+                                    <span className="number">(386 đánh giá)</span> */}
+                                    {renderRating(book)}
                                 </p>
                             </div>
                             <p className="price">
-                                {book.book_price}
-                                <span className="percent ">-{Math.round((1 - 1.0 * book.book_sale / book.book_price) * 100)}%</span>
-                                <span className="original ">{book.book_sale}</span>
+                                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(book.book_sale)}
+                                <span span className="percent " > -{Math.round((1 - 1.0 * book.book_sale / book.book_price) * 100)} %</span>
+                                <span className="original ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(book.book_price)}</span>
                             </p>
-                        </div>
-                    </a>
-                ))}
-            </div>
+                        </div >
+                    </a >
+                ))
+                }
+            </div >
             {/* <div className="category__product__items">
                 <a href="/">
                     <div className="similar__item ">

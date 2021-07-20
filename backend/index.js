@@ -12,7 +12,8 @@ app.use(express.json());
 // get all book
 app.get("/book", async (req, res) => {
     try {
-        const results = await db.query("SELECT * FROM book");
+        // const results = await db.query("SELECT * FROM book");
+        const results = await db.query("SELECT * FROM book left join (SELECT book_id, COUNT(*), TRUNC(AVG(eva_rate), 1) AS eva_rating FROM evaluate group by book_id) evaluate ON book.book_id = evaluate.book_id");
         res.status(200).json({
             status: "success",
             results: results.rows.length,
@@ -30,21 +31,30 @@ app.get("/book/:id", async (req, res) => {
     // console.log(req.params.id);
 
     try {
-        const result = await db.query(
+        const getABook = await db.query(
             "SELECT * FROM book where book_id = $1",
             [req.params.id]
         );
 
+        const reviews = await db.query(
+            "SELECT * FROM book left join (SELECT book_id, COUNT(*), TRUNC(AVG(eva_rate), 1) AS eva_rating FROM evaluate group by book_id) evaluate ON book.book_id = evaluate.book_id WHERE book.book_id = $1",
+            [req.params.id]
+        );
+
+        // console.log(reviews);
+
         res.status(200).json({
             status: "success",
             data: {
-                product: result.rows,
+                getABook: getABook.rows,
+                reviews: reviews.rows[0],
             },
         });
     } catch (err) {
         console.error(err.message);
     }
 });
+
 
 const port = process.env.PORT || 5001;
 

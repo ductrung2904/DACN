@@ -58,7 +58,7 @@ function Header() {
                                                 </a>
                                                 <a href="https://tiki.vn/customer/tikinow?src=header_my_account">
                                                     <span className="img"><img
-                                                        src="https://salt.tikicdn.com/ts/upload/5b/70/af/ac0eacaa8ec6738ac474f7bbe767bd75.png" />
+                                                        src="https://salt.tikicdn.com/ts/upload/5b/70/af/ac0eacaa8ec6738ac474f7bbe767bd75.png" alt="Tiki Now" />
                                                     </span>
                                                     <span className="content">
                                                         <span>TikiNOW</span>
@@ -69,7 +69,7 @@ function Header() {
                                                 <a href="/customer/coupons?src=header_my_account">
 
                                                     <span className="img"><img
-                                                        src="https://frontend.tikicdn.com/_desktop-next/static/img/mycoupon/coupon_code.svg" />
+                                                        src="https://frontend.tikicdn.com/_desktop-next/static/img/mycoupon/coupon_code.svg" alt="Coupon" />
                                                     </span>
                                                     <span className="content">
                                                         <span>Mã giảm giá</span>
@@ -81,7 +81,7 @@ function Header() {
 
                                                     <span className="img">
                                                         <img
-                                                            src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/tikixu.svg" />
+                                                            src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/tikixu.svg" alt="Tiki xu" />
                                                     </span>
                                                     <span className="content">
                                                         <span>Thông tin Tiki Xu</span>
@@ -92,7 +92,7 @@ function Header() {
                                                 <a href="/customer/bookcare?src=header_my_account">
                                                     <span className="img">
                                                         <img
-                                                            src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/bookcare.svg" />
+                                                            src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/bookcare.svg" alt="Bookcare" />
                                                     </span>
                                                     <span className="content">
                                                         <span>Thông tin BookCare</span>
@@ -103,7 +103,7 @@ function Header() {
                                                 <a href="/doi-tra-de-dang?src=header_my_account" >
                                                     Đổi trả dễ dàng
                                                 </a>
-                                                <a>
+                                                <a href="/">
                                                     Thoát tài khoản
                                                 </a>
                                             </div>
@@ -122,8 +122,8 @@ function Header() {
             <div className="header__breadcrumb">
                 <div className="container py-0 overflow-hidden">
                     <div className="breadcrumb mb-0">
-                        <a href="#" className="breadcrumb-item">Trang chủ</a>
-                        <a href="#" className="breadcrumb-item">Nhà sách Tiki</a>
+                        <a href="/" className="breadcrumb-item">Trang chủ</a>
+                        <a href="/" className="breadcrumb-item">Nhà sách Tiki</a>
                     </div>
                 </div>
             </div>
@@ -172,7 +172,7 @@ function Header() {
                                                         TextMode="Password" />
 
                                                 </div>
-                                                <span className='my-2'>Quên mật khẩu? Nhấn vào <a href="">đây</a>.</span>
+                                                <span className='my-2'>Quên mật khẩu? Nhấn vào <a href="/">đây</a>.</span>
                                                 <div className="form-button mt-3">
                                                     <button id="btnDangNhap2"
                                                         className="btn btn-warning text-dark justify-content-center"

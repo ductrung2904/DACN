@@ -154,7 +154,7 @@ function Sidebar() {
                     <a className="item item--publisher_vn "
                         href="https://tiki.vn/nha-sach-tiki/c8322?src=c.8322.hamburger_menu_fly_out_banner&amp;publisher_vn=626427&amp;page=1">NXB
                         Phụ Nữ Việt Nam</a>
-                </div><a href="javascript:" className="toggler">Xem thêm<svg stroke="currentColor" fill="currentColor"
+                </div><a href="/" className="toggler">Xem thêm<svg stroke="currentColor" fill="currentColor"
                     stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -235,7 +235,7 @@ function Sidebar() {
                     <a className="item item--author "
                         href="https://tiki.vn/nha-sach-tiki/c8322?src=c.8322.hamburger_menu_fly_out_banner&amp;author=172721%2C428417%2C428527&amp;page=1">Peppa
                         Pig</a>
-                </div><a href="javascript:" className="toggler">Xem thêm<svg stroke="currentColor" fill="currentColor"
+                </div><a href="/" className="toggler">Xem thêm<svg stroke="currentColor" fill="currentColor"
                     stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -325,7 +325,7 @@ function Sidebar() {
                         THƯƠNG</a>
                     <a className="item item--seller "
                         href="https://tiki.vn/nha-sach-tiki/c8322?src=c.8322.hamburger_menu_fly_out_banner&amp;seller=10511&amp;page=1">Geta</a>
-                </div><a href="javascript:" className="toggler">Xem thêm<svg stroke="currentColor" fill="currentColor"
+                </div><a href="/" className="toggler">Xem thêm<svg stroke="currentColor" fill="currentColor"
                     stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
