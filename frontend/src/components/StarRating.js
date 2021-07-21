@@ -6,11 +6,14 @@ function StarRating({ rating }) {
         if (i <= rating) {
             stars.push(<i key={i} className="icomoon icomoon-star"></i>);
         }
+        else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
+            stars.push(<i key={i} className="icomoon icomoon-star half"></i>);
+        }
         else {
             stars.push(<i key={i} className="icomoon icomoon-star dark"></i>);
         }
     }
-    return <>{stars}</>
+    return <>{stars}</>;
 };
 
 export default StarRating

@@ -25,7 +25,7 @@ function Main() {
         }
         return (
             <>
-                <StarRating rating={book.book_id} />
+                <StarRating rating={book.eva_rating} />
                 <span className="number">({book.count} đánh giá)</span>
             </>
         );
