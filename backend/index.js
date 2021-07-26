@@ -31,8 +31,13 @@ app.get("/book/:id", async (req, res) => {
     // console.log(req.params.id);
 
     try {
-        const getABook = await db.query(
-            "SELECT * FROM book where book_id = $1",
+        // const getABook = await db.query(
+        //     "SELECT * FROM book where book_id = $1",
+        //     [req.params.id]
+        // );
+
+        const getBookDetail = await db.query(
+            "select b.*, cp.com_name, ct.cat_name, a.aut_name, s.shop_name, s.shop_avatar from book b, company cp, category ct, author a, shop s where b.com_id = cp.com_id and b.cat_id = ct.cat_id and b.aut_id = a.aut_id and b.shop_id = s.shop_id and b.book_id = $1",
             [req.params.id]
         );
 
@@ -46,7 +51,8 @@ app.get("/book/:id", async (req, res) => {
         res.status(200).json({
             status: "success",
             data: {
-                getABook: getABook.rows,
+                books: getBookDetail.rows[0],
+                // getBookDetail: getBookDetail.rows,
                 reviews: reviews.rows[0],
             },
         });

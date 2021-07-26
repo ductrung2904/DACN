@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
+import { ProductContext } from '../context/ProductContext';
+import axiosClient from '../api/axiosClient';
 import StarRating from './StarRating';
 
-function Main() {
-    const [books, setBooks] = useState([]);
-
-    const getAllBooks = async () => {
-        try {
-            const response = await fetch("http://localhost:5000/book");
-            const jsonData = await response.json();
-
-            setBooks(jsonData.data.book);
-        } catch (err) {
-            console.error(err.message);
-        }
-    };
+function Main(props) {
+    const { books, setBooks } = useContext(ProductContext);
+    let history = useHistory();
 
     useEffect(() => {
+        const getAllBooks = async () => {
+            try {
+                const response = await axiosClient.get("/");
+                console.log(response.data.data);
+                setBooks(response.data.data.book);
+            } catch (err) {
+                console.error(err.message);
+            }
+        };
+
         getAllBooks();
-    }, []);
+    });
 
     const renderRating = (book) => {
         if (!book.count) {
@@ -31,12 +34,15 @@ function Main() {
         );
     };
 
-    console.log(books);
+    const handleSelect = (book_id) => {
+        history.push(`/book/${book_id}`);
+    };
+
     return (
         <>
             <div className="category__product__items">
                 {books && books.map(book => (
-                    <a href="/" key={book.book_id}>
+                    <a href={`/book/${book.book_id}`} onClick={() => handleSelect(book.book_id)} key={book.book_id}>
                         <div className="similar__item ">
                             <div className="text-center">
                                 <img src={"https://salt.tikicdn.com/cache/280x280/ts/product/" + book.book_img + ".jpg"}
@@ -60,7 +66,7 @@ function Main() {
                                 <span className="original ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(book.book_price)}</span>
                             </p>
                         </div >
-                    </a >
+                    </a>
                 ))
                 }
             </div >
