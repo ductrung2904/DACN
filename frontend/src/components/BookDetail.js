@@ -12,7 +12,7 @@ function BookDetail({ com_name, public_date, width, height, translator, cover_ty
                         </tr>
                         <tr>
                             <td>Ngày xuất bản</td>
-                            <td>{public_date}</td>
+                            <td>{new Date(public_date).toLocaleDateString('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' })}</td>
                         </tr>
                         <tr>
                             <td>Kích thước</td>

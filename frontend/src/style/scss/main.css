@@ -126,6 +126,7 @@ body {
   color: #999999;
   font-size: 13px;
   font-weight: 300;
+  white-space: nowrap;
 }
 
 .header__breadcrumb .breadcrumb-item::before,
@@ -308,6 +309,10 @@ body {
   line-height: 20px;
 }
 
+.book__header .detail__item__stars {
+  color: #ffc120;
+}
+
 .book__right .title {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -359,6 +364,16 @@ body {
 .book__price__discount {
   font-size: 13px;
   line-height: 20px;
+}
+
+.book__price .book__price__viewmore .tikicard__icon {
+  margin-top: -3px;
+}
+
+.book__price .book__price__viewmore .view-more {
+  width: 12px;
+  height: 12px;
+  margin-top: 5px;
 }
 
 .book__add__address {
@@ -713,11 +728,15 @@ body {
 .evaluate__middle > b {
   width: 20%;
   text-align: center;
-  height: 122px;
+  /* height: 122px; */
   line-height: 122px;
   font-size: 50px;
   font-weight: 700;
   color: #fd9727;
+}
+
+.evaluate__middle .evaluate__star {
+  margin: 10px 10px 22px;
 }
 
 .evaluate__middle > .rate-analyst {
@@ -787,22 +806,6 @@ body {
   background-color: #fd9727 !important;
 }
 
-.evaluate__middle .rate-analyst .progressbar__out .progressbar__in__1 {
-  width: 70%;
-}
-
-.evaluate__middle .rate-analyst .progressbar__out .progressbar__in__2 {
-  width: 16%;
-}
-
-.evaluate__middle .rate-analyst .progressbar__out .progressbar__in__3 {
-  width: 6%;
-}
-
-.evaluate__middle .rate-analyst .progressbar__out .progressbar__in__4 {
-  width: 2%;
-}
-
 .evaluate .cmtKey {
   padding: 10px 8px 10px 35px;
   border: 1px solid #ddd;
@@ -845,7 +848,7 @@ body {
   font-weight: 600;
 }
 
-.evaluate__avatar > span {
+/* .evaluate__avatar > span {
   display: inline-block;
   color: #999999;
   background-color: #d3d2d3;
@@ -856,6 +859,11 @@ body {
   border-radius: 50%;
   width: 48px;
   height: 48px;
+} */
+
+.evaluate__avatar .evaluate__avatar__img {
+  border-radius: 100px;
+  margin-bottom: 10px;
 }
 
 .evaluate__info {
@@ -930,10 +938,11 @@ body {
 }
 
 .evaluate__images img {
-  width: 158px;
-  height: 158px;
+  width: 152px;
+  height: 152px;
   border-radius: 4px;
   background-size: cover;
+  background-position: center center;
   margin: 0px 6px 16px;
   cursor: pointer;
 }
@@ -965,6 +974,10 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.evaluate__rate {
+  color: #ffc120;
 }
 
 .evaluate__rate__content {
@@ -1625,5 +1638,22 @@ body {
 
 .detail__rating p {
   color: rgb(255, 193, 32);
+}
+
+.slick-arrow {
+  background-color: #000;
+  width: 34px;
+  height: 34px;
+  margin-right: 8px;
+  border-radius: 100px;
+  opacity: 0.3;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.slick-arrow:hover,
+.slick-arrow:focus {
+  background-color: #000 !important;
+  opacity: 1;
 }
 /*# sourceMappingURL=main.css.map */

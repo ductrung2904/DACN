@@ -119,14 +119,14 @@ function Header() {
 
             </table>
 
-            <div className="header__breadcrumb">
+            {/* <div className="header__breadcrumb">
                 <div className="container py-0 overflow-hidden">
                     <div className="breadcrumb mb-0">
                         <a href="/" className="breadcrumb-item">Trang chủ</a>
                         <a href="/" className="breadcrumb-item">Nhà sách Tiki</a>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="modal fade" id="modalDangNhap" tabindex="-1" role="dialog" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-lg">

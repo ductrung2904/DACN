@@ -4,7 +4,7 @@ import { ProductContext } from '../context/ProductContext';
 import axiosClient from '../api/axiosClient';
 import StarRating from './StarRating';
 
-function Main(props) {
+function Main() {
     const { books, setBooks } = useContext(ProductContext);
     let history = useHistory();
 
@@ -35,14 +35,14 @@ function Main(props) {
     };
 
     const handleSelect = (book_id) => {
-        history.push(`/book/${book_id}`);
+        history.push(`/nha-sach-tiki/${book_id}`);
     };
 
     return (
         <>
             <div className="category__product__items">
                 {books && books.map(book => (
-                    <a href={`/book/${book.book_id}`} onClick={() => handleSelect(book.book_id)} key={book.book_id}>
+                    <a href={`/nha-sach-tiki/${book.book_id}/${book.book_metatitle}`} onClick={() => handleSelect(book.book_id)} key={book.book_id}>
                         <div className="similar__item ">
                             <div className="text-center">
                                 <img src={"https://salt.tikicdn.com/cache/280x280/ts/product/" + book.book_img + ".jpg"}
