@@ -64,7 +64,7 @@ function ProductDetail() {
                         {/* Custom evaluate */}
                         <h4 className="title">KHÁCH HÀNG NHẬN XÉT</h4>
                         <section className="evaluate">
-                            <EvaluateRating eva_rate={selectBook.evaluateRating.eva_rate} eva_rating={selectBook.evaluateRating.eva_rating} eva_count={selectBook.evaluateRating.count} />
+                            <EvaluateRating eva_rate={selectBook.evaluateRating.eva_rate} eva_rating={selectBook.evaluateRating.eva_rating} eva_count={selectBook.evaluateRating.count} count={selectBook.evaluateCount} />
                             <EvaluateImages eva_images={selectBook.evaluateImages} />
                             <Evaluate evaluates={selectBook.evaluates} />
                         </section>

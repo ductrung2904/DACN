@@ -962,6 +962,10 @@ body {
   cursor: pointer;
 }
 
+.evaluate__thank > svg {
+  margin: 0px 8px 0px 0px;
+}
+
 .evaluate__reply {
   display: inline-block;
   padding: 8px 16px 9px;
@@ -1083,7 +1087,7 @@ body {
   vertical-align: top;
 }
 
-.category__product__list h1 {
+/* .category__product__list h1 {
   display: inline;
   font-weight: 600;
   font-size: 28px;
@@ -1098,6 +1102,17 @@ body {
 
 .category__product__list__row img {
   width: 100%;
+} */
+
+.category__product__items {
+  display: inherit;
+}
+
+.category__product__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: stretch;
+  background-color: rgb(255, 255, 255);
 }
 
 .category .similar__item {
@@ -1656,4 +1671,35 @@ body {
   background-color: #000 !important;
   opacity: 1;
 }
+
+.paginationBttns {
+  width: 80%;
+  height: 40px;
+  padding-top: 10px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns .previous {
+  z-index: 0;
+}
+
+.paginationBttns a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.paginationBttns a:hover {
+  color: #fff;
+  background-color: rgb(193, 231, 255);
+}
+
+.paginationActive a {
+  color: #fff;
+  background-color: rgb(24, 158, 255);
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -1,7 +1,7 @@
 import React from 'react'
 
-function EvaluateRating({ eva_rate, eva_rating, eva_count }) {
-    const temp = [15, 7, 4, 7, 2];
+function EvaluateRating({ eva_rate, eva_rating, eva_count, count }) {
+    const temp = [17, 10, 5, 4, 7];
 
     for (var i = 5; i > 0; i--) {
         temp.push(

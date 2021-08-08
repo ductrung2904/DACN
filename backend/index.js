@@ -51,6 +51,11 @@ app.get("/book/:id/:metatitle", async (req, res) => {
             [req.params.id]
         );
 
+        const evaluateCount = await db.query(
+            "select eva_rate, count(eva_rate) as number from evaluate e, book b where e.book_id = b.book_id and b.book_id = $1 group by eva_rate order by eva_rate desc",
+            [req.params.id]
+        );
+
         const evaluateImages = await db.query(
             "SELECT e.eva_imgs FROM evaluate e, book b WHERE e.book_id = b.book_id and b.book_id = $1",
             [req.params.id]
@@ -63,6 +68,7 @@ app.get("/book/:id/:metatitle", async (req, res) => {
                 same_products: sameProduct.rows,
                 evaluates: evaluates.rows,
                 evaluateRating: evaluateRating.rows[0],
+                evaluateCount: evaluateCount.rows,
                 evaluateImages: evaluateImages.rows,
             },
         });

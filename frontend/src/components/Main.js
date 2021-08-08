@@ -1,12 +1,15 @@
-import React, { useContext, useEffect } from 'react'
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
 import { ProductContext } from '../context/ProductContext';
 import axiosClient from '../api/axiosClient';
 import StarRating from './StarRating';
+import ReactPaginate from 'react-paginate';
 
 function Main() {
     const { books, setBooks } = useContext(ProductContext);
-    let history = useHistory();
+    const [pageNumber, setPageNumber] = useState(0);
+
+    const usersPerPage = 16;
+    const pagesVisited = pageNumber * usersPerPage;
 
     useEffect(() => {
         const getAllBooks = async () => {
@@ -34,69 +37,60 @@ function Main() {
         );
     };
 
-    const handleSelect = (book_id) => {
-        history.push(`/nha-sach-tiki/${book_id}`);
-    };
+    const displayUsers = books.slice(pagesVisited, pagesVisited + usersPerPage).map((books) => {
+        return (
 
-    return (
-        <>
             <div className="category__product__items">
-                {books && books.map(book => (
-                    <a href={`/nha-sach-tiki/${book.book_id}/${book.book_metatitle}`} onClick={() => handleSelect(book.book_id)} key={book.book_id}>
-                        <div className="similar__item ">
-                            <div className="text-center">
-                                <img src={"https://salt.tikicdn.com/cache/280x280/ts/product/" + book.book_img + ".jpg"}
-                                    alt={book.book_name} />
-                            </div>
-                            <p className="similar__item__name">{book.book_name}</p>
-                            <div>
-                                <p className="d-inline similar__item__stars">
-                                    {/* <i className="icomoon icomoon-star"></i>
-                                    <i className="icomoon icomoon-star"></i>
-                                    <i className="icomoon icomoon-star"></i>
-                                    <i className="icomoon icomoon-star"></i>
-                                    <i className="icomoon icomoon-star"></i>
-                                    <span className="number">(386 đánh giá)</span> */}
-                                    {renderRating(book)}
-                                </p>
-                            </div>
-                            <p className="price">
-                                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(book.book_sale)}
-                                <span span className="percent " > -{Math.round((1 - 1.0 * book.book_sale / book.book_price) * 100)} %</span>
-                                <span className="original ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(book.book_price)}</span>
-                            </p>
-                        </div >
-                    </a>
-                ))
-                }
-            </div >
-            {/* <div className="category__product__items">
-                <a href="/">
+
+                <a className="product__item" href={`/nha-sach-tiki/${books.book_id}/${books.book_metatitle}`} key={books.book_id}>
                     <div className="similar__item ">
                         <div className="text-center">
-                            <img src="https://salt.tikicdn.com/cache/280x280/ts/product/a0/73/4f/92af6309562efb8d90602ab2efdf42b3.jpg"
-                                alt="Tên sách item" />
+                            <img src={"https://salt.tikicdn.com/cache/280x280/ts/product/" + books.book_img + ".jpg"}
+                                alt={books.book_name} />
                         </div>
-                        <p className="similar__item__name">Kiên trì ắc được đền đáp (Tái bản)</p>
+                        <p className="similar__item__name">{books.book_name}</p>
                         <div>
                             <p className="d-inline similar__item__stars">
-                                <i className="icomoon icomoon-star"></i>
-                                <i className="icomoon icomoon-star"></i>
-                                <i className="icomoon icomoon-star"></i>
-                                <i className="icomoon icomoon-star"></i>
-                                <i className="icomoon icomoon-star"></i>
-                                <span className="number">(386 đánh giá)</span>
+                                {/* <i className="icomoon icomoon-star"></i>
+                                        <i className="icomoon icomoon-star"></i>
+                                        <i className="icomoon icomoon-star"></i>
+                                        <i className="icomoon icomoon-star"></i>
+                                        <i className="icomoon icomoon-star"></i>
+                                        <span className="number">(386 đánh giá)</span> */}
+                                {renderRating(books)}
                             </p>
                         </div>
                         <p className="price">
-                            39.000 ₫
-                            <span className="percent ">-40%</span>
-                            <span className="original ">65.000 ₫</span>
+                            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(books.book_sale)}
+                            <span span className="percent " > -{Math.round((1 - 1.0 * books.book_sale / books.book_price) * 100)} %</span>
+                            <span className="original ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(books.book_price)}</span>
                         </p>
-                    </div>
+                    </div >
                 </a>
-            </div> */ }
-        </>
+
+            </div >
+
+        )
+    });
+
+    const pageCount = Math.ceil(books.length / usersPerPage);
+
+    const changePage = ({ selected }) => {
+        setPageNumber(selected);
+        window.scrollTo({ behavior: "smooth", top: 200 });
+    };
+
+    return (
+        <span>
+            {displayUsers}
+            <ReactPaginate
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={"paginationBttns"}
+                disabledClassName={"paginationDisabled"}
+                activeClassName={"paginationActive"}
+            />
+        </span>
     )
 }
 
