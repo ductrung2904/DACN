@@ -4,11 +4,10 @@ import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import Footer from './components/Footer';
 import ProductDetail from './pages/ProductDetail';
-import { ProductContextProvider } from './context/ProductContext';
 
 function App() {
   return (
-    <ProductContextProvider>
+    <div>
       <Header />
       <Router>
         <Switch>
@@ -18,7 +17,7 @@ function App() {
       </Router>
       <script src="./js/bootstrap.bundle.min.js"></script>
       <Footer />
-    </ProductContextProvider>
+    </div>
   );
 }
 
