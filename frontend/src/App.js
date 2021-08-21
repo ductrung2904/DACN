@@ -13,7 +13,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/nha-sach-tiki/:id/:metatitle/" component={ProductDetail} />
+          <Route path="/nha-sach-tiki/:id/:metatitle" component={ProductDetail} />
         </Switch>
       </Router>
       <script src="./js/bootstrap.bundle.min.js"></script>
