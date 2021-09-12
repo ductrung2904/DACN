@@ -1,6 +1,6 @@
 import React from 'react';
-import Sidebar from '../components/Sidebar';
-import Main from '../components/Main';
+import Sidebar from '../components/HomePage/Sidebar';
+import Main from '../components/HomePage/Main';
 
 function HomePage() {
     return (

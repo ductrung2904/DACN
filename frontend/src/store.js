@@ -1,14 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import shortItem from './features/shortItemSlice';
-import currentBook from './features/bookDetailSlice';
-
-const rootReducer = {
-    shortItem,
-    currentBook
-}
+import persistStore from 'redux-persist/es/persistStore';
+import persistReducer from './reducers';
+// import rootReducer from './reducers';
 
 const store = configureStore({
-    reducer: rootReducer
+    reducer: persistReducer
 });
 
-export default store
+export const persistor = persistStore(store);
+
+export default store;

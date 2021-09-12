@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import productApi from "../api/productApi";
 
 const bookDetailSlice = createSlice({
     name: 'currentBook',
@@ -8,11 +7,12 @@ const bookDetailSlice = createSlice({
         sameProduct: [],
         evaluates: [],
         evaluateImages: [],
+        evaluateCount: [],
         isLoading: false,
         error: ""
     },
     reducers: {
-        loading: (state) => {
+        loadingDetail: (state) => {
             state.isLoading = true;
         },
         lstBookDetail: (state, { payload }) => {
@@ -31,7 +31,11 @@ const bookDetailSlice = createSlice({
             state.isLoading = false;
             state.evaluateImages = action.payload;
         },
-        loadFail: (state, { payload }) => {
+        lstEvaluateCount: (state, action) => {
+            state.isLoading = false;
+            state.evaluateCount = action.payload;
+        },
+        loadDetailFail: (state, { payload }) => {
             state.isLoading = false;
             state.error = payload;
         },
@@ -40,27 +44,6 @@ const bookDetailSlice = createSlice({
 
 const { reducer, actions } = bookDetailSlice
 
-export const { loading, lstBookDetail, lstSameProduct, lstEvaluates, lstEvaluateImages, loadFail } = actions
+export const { loadingDetail, lstBookDetail, lstSameProduct, lstEvaluates, lstEvaluateImages, lstEvaluateCount, loadDetailFail } = actions
 
 export default reducer
-
-export const getDetail = (id, metatitle) => async (dispatch) => {
-    dispatch(loading());
-    try {
-        const response = await productApi.getById(id, metatitle)
-        dispatch(
-            lstBookDetail(response.data.data.books)
-        );
-        dispatch(
-            lstSameProduct(response.data.data.same_products)
-        );
-        dispatch(
-            lstEvaluateImages(response.data.data.evaluateImages)
-        );
-        dispatch(
-            lstEvaluates(response.data.data.evaluates)
-        );
-    } catch (error) {
-        dispatch(loadFail(error.message));
-    }
-}

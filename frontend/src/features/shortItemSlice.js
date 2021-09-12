@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import productApi from "../api/productApi";
 
 const shortItemSlice = createSlice({
     name: 'shortItem',
@@ -28,14 +27,3 @@ const { reducer, actions } = shortItemSlice
 export const { loading, loadSuccess, loadFail } = actions
 
 export default reducer
-
-export const getBooks = () => async (dispatch) => {
-    dispatch(loading());
-    try {
-        const response = await productApi.getAll()
-        response.data.data.book.length &&
-            dispatch(loadSuccess(response.data.data.book));
-    } catch (error) {
-        dispatch(loadFail(error.message))
-    }
-}

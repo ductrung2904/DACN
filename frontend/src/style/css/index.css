@@ -91,7 +91,7 @@ html {
 }
 
 .header .container {
-  padding: 20px 0 16px;
+  padding: 20px 30px 16px;
   position: relative;
 }
 
@@ -164,7 +164,7 @@ html {
 
 .header__card {
   border: 2px solid #fff;
-  padding: 8px 11px;
+  padding: 8px 28px 8px 11px;
   border-radius: 4px;
   letter-spacing: 0.7px;
   font-weight: 400;
