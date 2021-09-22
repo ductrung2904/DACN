@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBox from './SearchBox';
 import Cart from './CartIcon';
-import Login from '../Cart/Login';
+import LoginAndRegister from '../Cart/LoginAndRegister';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../features/loginSlice';
 
@@ -136,7 +136,7 @@ function Header() {
                 </tr>
 
             </table>
-            <Login />
+            <LoginAndRegister />
 
         </header>
     )

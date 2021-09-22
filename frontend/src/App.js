@@ -5,6 +5,8 @@ import HomePage from './pages/HomePage';
 import Footer from './components/HomePage/Footer';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './components/Cart/Cart';
+import Shipping from './components/Cart/Shipping';
+import Payment from './components/Cart/Payment';
 
 function App() {
   return (
@@ -12,15 +14,16 @@ function App() {
       <Header />
       <Router>
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={HomePage} title="Tiki - Mua hàng online giá tốt, hàng chuẩn, ship nhanh" />
           <Route path="/nha-sach-tiki/:id/:metatitle" component={ProductDetail} />
           <Route path="/checkout/cart" component={Cart} />
+          <Route path="/checkout/shipping" component={Shipping} />
+          <Route path="/checkout/payment" component={Payment} />
           <Route path="*">
-            <h1>404 Page Not Found</h1>
+            <h1 className="text-center">404 Page Not Found</h1>
           </Route>
         </Switch>
       </Router>
-      <script src="./js/bootstrap.bundle.min.js"></script>
       <Footer />
     </div>
   );

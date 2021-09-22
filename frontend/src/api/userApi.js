@@ -1,7 +1,5 @@
-// import axios from "axios";
 import axios from "axios";
 import { loginFail, loginSuccess, logout } from "../features/loginSlice";
-// import { getUserFail, getUserPending, getUserSuccess } from "../features/userSlice";
 import axiosClient from "./axiosClient";
 
 const userApi = {
@@ -15,12 +13,14 @@ const userApi = {
     }
 }
 
-const url = "http://localhost:5000/login";
+const loginUrl = "http://localhost:5000/login";
+
+const registerUrl = "http://localhost:5000/register";
 
 export const userLogin = (frmData) => {
     return new Promise(async (resolve, reject) => {
         try {
-            const res = await axios.post(url, frmData);
+            const res = await axios.post(loginUrl, frmData);
             console.log(res);
             resolve(res.data);
 
@@ -45,6 +45,30 @@ export const getUserInfo = (username) => async (dispatch) => {
 export const userLogout = async () => {
     try {
         logout()
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+export const userRegister = (frmData) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await axios.post(registerUrl, frmData);
+            resolve(res.data);
+
+            if (res.data.status === "success") {
+                resolve(res.data);
+            }
+        } catch (error) {
+            reject(error);
+        }
+    })
+}
+
+export const userRegisterVerify = (frmData) => async () => {
+    try {
+        const result = await userRegister(frmData);
+        console.log(result);
     } catch (error) {
         console.log(error.message);
     }

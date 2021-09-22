@@ -9,17 +9,18 @@ router.post("/register", async (req, res) => {
         const user = await db.query("SELECT * FROM customer WHERE cus_usr = $1", [username]);
 
         if (user.rows.length > 0) {
-            return res.status(401).json("Tên đăng nhập đã tồn tại");
+            return res.json({ status: "error", message: "Tên đăng nhập đã tồn tại" });
         }
 
         let newUser = await db.query(
             "INSERT INTO customer (cus_usr, cus_pwd, cus_name, cus_phone, cus_address, cus_email, cus_gender) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
             [username, password, name, phone, address, email, gender]
         );
-        res.json(newUser.rows[0]);
+        const result = newUser.rows[0];
+        res.json({ status: "success", message: "Đăng ký thành công", result });
     } catch (err) {
         console.error(err.message);
-        res.status(500).send("Lỗi server");
+        res.json({ status: "error", message: "Lỗi server" })
     }
 });
 

@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserInfo, userLogin } from '../../api/userApi';
+import { getUserInfo, userLogin, userRegisterVerify } from '../../api/userApi';
 import { loginSuccess, loginFail } from '../../features/loginSlice';
 import img from '../../style/img/adDangNhap.png';
+import validateInfo from '../validateInfo';
 
-function Login() {
+function LoginAndRegister() {
     const dispatch = useDispatch();
 
     const history = useHistory();
 
+    // Login
     const { userInfo, error } = useSelector(state => state.login);
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleOnChange = e => {
+    const handleLoginOnChange = e => {
         const { name, value } = e.target;
 
         switch (name) {
@@ -30,7 +32,7 @@ function Login() {
         }
     };
 
-    const handleOnSubmit = async e => {
+    const handleLoginOnSubmit = async e => {
         e.preventDefault();
 
         if (!username || !password) {
@@ -56,8 +58,34 @@ function Login() {
         }
     }
 
+    // Register
+    const [newUser, setNewUser] = useState("");
+    const [errors, setErrors] = useState({});
+    const temp = "$('#pills-DangNhap').trigger('click')";
+
+    useEffect(() => { }, [newUser]);
+
+    const handleRegisterOnChange = (e) => {
+        const { name, value } = e.target;
+
+        setNewUser({ ...newUser, [name]: value });
+    }
+
+    const handleRegisterOnSubmit = (e) => {
+        e.preventDefault();
+        const { name, username, password, address, phone, email, gender } = newUser;
+        const newRegistration = { name, username, password, address, phone, email, gender };
+        setErrors(validateInfo(newUser));
+        if (Object.keys(errors).length === 0) {
+            dispatch(userRegisterVerify(newRegistration));
+            setUsername(newUser.username);
+            setPassword(newUser.password);
+            alert("Đăng ký thành công")
+        }
+    }
+
     return (
-        <div className="modal fade" id="modalDangNhap" tabindex="-1" role="dialog" aria-hidden="true">
+        <div className="modal fade" id="modalDangNhap" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalDangNhap" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div className="modal-content">
                     <div className="close" data-bs-dismiss="modal" aria-label="Close">
@@ -90,7 +118,7 @@ function Login() {
                                     </ul>
                                     <div className="tab-content" id="pills-tabContent">
                                         <form className="tab-pane fade show active" id="pills-DangNhap" role="tabpanel"
-                                            aria-labelledby="pills-DangNhap-tab" onSubmit={handleOnSubmit}>
+                                            aria-labelledby="pills-DangNhap-tab" onSubmit={handleLoginOnSubmit}>
                                             <div className='labelinput'>
                                                 <label for="Username" className='lblInfo'>Tên đăng nhập</label>
 
@@ -100,7 +128,7 @@ function Login() {
                                                     placeholder="Username"
                                                     name="username"
                                                     value={username}
-                                                    onChange={handleOnChange}
+                                                    onChange={handleLoginOnChange}
                                                     required
                                                 />
                                             </div>
@@ -113,7 +141,7 @@ function Login() {
                                                     className="form-control form-input"
                                                     name="password"
                                                     value={password}
-                                                    onChange={handleOnChange}
+                                                    onChange={handleLoginOnChange}
                                                     required
                                                 />
 
@@ -122,7 +150,7 @@ function Login() {
                                             <div className="form-button mt-3">
                                                 <button id="btnDangNhap2"
                                                     className="btn btn-warning text-dark justify-content-center"
-                                                    ToolTip="Log in">Đăng nhập</button>
+                                                    data-bs-dismiss="modal">Đăng nhập</button>
                                                 <button className="btn btn-success justify-content-center">
                                                     Đăng nhập bằng Số điện thoại</button>
                                                 <button className="btn btn-facebook">
@@ -141,68 +169,138 @@ function Login() {
                                         <div className="tab-pane fade" id="pills-DangKy" role="tabpanel"
                                             aria-labelledby="pills-DangKy-tab">
 
-                                            <form className="needs-validation" novalidate>
-
+                                            <form className="needs-validation" onSubmit={handleRegisterOnSubmit}>
                                                 <div className='labelinput'>
                                                     <label for="hoTen" className='lblInfo'>Họ tên</label>
-                                                    <input type='text' id="txtHoTen" placeholder="Nhập họ tên"
-                                                        className="form-control form-input" ToolTip="Nhập họ tên" />
+                                                    <input
+                                                        type='text'
+                                                        placeholder="Nhập họ tên"
+                                                        name="name"
+                                                        value={newUser.name}
+                                                        onChange={handleRegisterOnChange}
+                                                        className="form-control form-input"
+                                                    />
                                                 </div>
+                                                {errors.name && (
+                                                    <div class="text-danger">{errors.name}</div>
+                                                )}
 
                                                 <div className='labelinput'>
                                                     <label for="txtUser" className='lblInfo'>Tên đăng nhập</label>
 
-                                                    <input type='text' id="txtUser" className="form-control form-input"
-                                                        ToolTip="Nhập tên đăng nhập" placeholder="Nhập tên đăng nhập" />
+                                                    <input
+                                                        type='text'
+                                                        name="username"
+                                                        value={newUser.username}
+                                                        onChange={handleRegisterOnChange}
+                                                        className="form-control form-input"
+                                                        placeholder="Nhập tên đăng nhập"
+                                                    />
 
                                                 </div>
+                                                {errors.username && (
+                                                    <div class="text-danger">{errors.username}</div>
+                                                )}
 
                                                 <div className='labelinput'>
                                                     <label for="txtPass" className='lblInfo'>Mật khẩu</label>
 
-                                                    <input type='text' id="txtPass" TextMode="Password"
-                                                        className="form-control form-input" ToolTip="Nhập mật khẩu"
-                                                        placeholder="Nhập mật khẩu từ 6 đến 32 ký tự" />
+                                                    <input
+                                                        type='password'
+                                                        name="password"
+                                                        value={newUser.password}
+                                                        onChange={handleRegisterOnChange}
+                                                        className="form-control form-input"
+                                                        placeholder="Nhập mật khẩu từ 8 đến 32 ký tự"
+                                                    />
 
                                                 </div>
+                                                {errors.password && (
+                                                    <div class="text-danger">{errors.password}</div>
+                                                )}
 
                                                 <div className='labelinput'>
                                                     <label for="txtPass" className='lblInfo'>Địa chỉ</label>
 
-                                                    <input type='text' id="txtDiaChi" className="form-control form-input"
-                                                        ToolTip="Nhập địa chỉ" placeholder="Address" />
+                                                    <input
+                                                        type='text'
+                                                        name="address"
+                                                        value={newUser.address}
+                                                        onChange={handleRegisterOnChange}
+                                                        className="form-control form-input"
+                                                        placeholder="Nhập địa chỉ"
+                                                    />
 
                                                 </div>
+                                                {errors.address && (
+                                                    <div class="text-danger">{errors.address}</div>
+                                                )}
+
                                                 <div className='labelinput'>
                                                     <label for="dienThoai" className='lblInfo'>SĐT</label>
-                                                    <input type='text' id="txtDienThoai" className="form-control form-input"
-                                                        ToolTip="Nhập số điện thoại" placeholder="Nhập số điện thoại" />
+                                                    <input
+                                                        type='number'
+                                                        name="phone"
+                                                        value={newUser.phone}
+                                                        onChange={handleRegisterOnChange}
+                                                        className="form-control form-input"
+                                                        placeholder="Nhập số điện thoại"
+                                                    />
                                                 </div>
+                                                {errors.phone && (
+                                                    <div class="text-danger">{errors.phone}</div>
+                                                )}
+
                                                 <div className='labelinput'>
                                                     <label for="email" className='lblInfo'>Email</label>
 
-                                                    <input type='text' id="txtEmail" className="form-control form-input"
-                                                        ToolTip="Nhập email" placeholder="Nhập email" />
+                                                    <input
+                                                        type='email'
+                                                        name="email"
+                                                        value={newUser.email}
+                                                        onChange={handleRegisterOnChange}
+                                                        className="form-control form-input"
+                                                        placeholder="Nhập email"
+                                                    />
                                                 </div>
+                                                {errors.email && (
+                                                    <div class="text-danger">{errors.email}</div>
+                                                )}
 
                                                 <div className='labelinput'>
                                                     <label for="gioiTinh" className='lblInfo'>Giới tính</label>
                                                     <div className="form-input">
                                                         <div className="form-check form-check-inline">
-                                                            <input type='radio' name='gender' id='male'
-                                                                className="form-check-input" />
+                                                            <input
+                                                                type='radio'
+                                                                name='gender'
+                                                                value="1"
+                                                                onChange={handleRegisterOnChange}
+                                                                id='male'
+                                                                className="form-check-input"
+                                                            />
                                                             <label className="form-check-label" for="male">Nam</label>
                                                         </div>
                                                         <div className="form-check form-check-inline">
-                                                            <input type='radio' id='female' name='gender'
-                                                                className="form-check-input" />
+                                                            <input
+                                                                type='radio'
+                                                                id='female'
+                                                                name='gender'
+                                                                value="0"
+                                                                onChange={handleRegisterOnChange}
+                                                                className="form-check-input"
+                                                            />
                                                             <label className="form-check-label" for="female">Nữ</label>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {errors.gender && (
+                                                    <div class="text-danger">{errors.gender}</div>
+                                                )}
+
                                                 <div className="form-button mt-3">
                                                     <button id="btnDangKy"
-                                                        className="btn btn-warning text-dark justify-content-center">Đăng
+                                                        className="btn btn-warning text-dark justify-content-center" onClick={temp}>Đăng
                                                         ký</button>
                                                 </div>
                                             </form>
@@ -218,4 +316,4 @@ function Login() {
     )
 }
 
-export default Login
+export default LoginAndRegister

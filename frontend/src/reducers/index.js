@@ -3,13 +3,15 @@ import shortItem from '../features/shortItemSlice';
 import currentBook from '../features/bookDetailSlice';
 import cart from '../features/cartSlice';
 import login from '../features/loginSlice';
+import shipping from '../features/shippingSlice';
+import payment from '../features/paymentSlice';
 import { persistReducer } from 'redux-persist';
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['login']
+    whitelist: ['login', 'cart', 'shipping']
 }
 
 const rootReducer = combineReducers({
@@ -17,6 +19,8 @@ const rootReducer = combineReducers({
     currentBook,
     cart,
     login,
+    shipping,
+    payment
 });
 
 export default persistReducer(persistConfig, rootReducer);

@@ -14,6 +14,8 @@ app.use(require("./routes/product"));
 
 app.use(require("./routes/user"));
 
+app.use(require("./routes/order"));
+
 const port = process.env.PORT || 5001;
 
 app.listen(port, () => {

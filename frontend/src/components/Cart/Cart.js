@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router';
 import { addToCart, decreaseCart, getTotals, removeProduct } from '../../features/cartSlice';
 
 function Cart() {
     const cart = useSelector((state) => state.cart)
+    const { isAuth, userInfo } = useSelector(state => state.login);
+    const history = useHistory();
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -31,9 +34,12 @@ function Cart() {
         dispatch(removeProduct(product))
     };
 
-    // const handleClearCart = (product) => {
-    //     dispatch(clearCart(product))
-    // };
+    const handleCheckout = () => {
+        if (userInfo && isAuth === true) {
+
+            history.push('/checkout/shipping');
+        }
+    }
     return (
         <div className="container">
             <div className="cart-empty">
@@ -121,7 +127,12 @@ function Cart() {
                                             className="prices__value prices__value--final">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cart.cartTotalAmount)}<i>(Đã bao gồm VAT nếu có)</i></span>
                                         </p>
                                     </div>
-                                </div><button type="button" className="cart__submit">Tiến hành đặt hàng</button>
+                                </div>
+                                {userInfo && isAuth === true ? (
+                                    <button type="button" className="cart__submit" onClick={handleCheckout}>Tiến hành đặt hàng</button>
+                                ) : (
+                                    <button type="button" className="cart__submit" data-bs-toggle="modal" data-bs-target="#modalDangNhap">Đăng nhập và thanh toán</button>
+                                )}
                             </div>
                         </section>
                     </>
