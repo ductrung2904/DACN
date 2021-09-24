@@ -3,6 +3,7 @@ import StarRating from '../StarRating';
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBooks } from '../../api/productApi';
+import { Helmet } from 'react-helmet';
 
 function Main() {
     const [pageNumber, setPageNumber] = useState(0);
@@ -34,37 +35,40 @@ function Main() {
         if (isLoading) return <div>Loading.....</div>;
         if (error) return <div>Error</div>;
         return (
+            <>
+                <Helmet>
+                    <title>Tiki - Mua hàng online giá tốt, hàng chuẩn, ship nhanh</title>
+                </Helmet>
+                <div className="category__product__items">
 
-            <div className="category__product__items">
-
-                <a className="product__item" href={`/nha-sach-tiki/${book.book_id}/${book.book_metatitle}`} key={book.book_id}>
-                    <div className="similar__item ">
-                        <div className="text-center">
-                            <img src={"https://salt.tikicdn.com/cache/280x280/ts/product/" + book.book_img + ".jpg"}
-                                alt={book.book_name} />
-                        </div>
-                        <p className="similar__item__name">{book.book_name}</p>
-                        <div>
-                            <p className="d-inline similar__item__stars">
-                                {/* <i className="icomoon icomoon-star"></i>
+                    <a className="product__item" href={`/nha-sach-tiki/${book.book_id}/${book.book_metatitle}`} key={book.book_id}>
+                        <div className="similar__item ">
+                            <div className="text-center">
+                                <img src={"https://salt.tikicdn.com/cache/280x280/ts/product/" + book.book_img + ".jpg"}
+                                    alt={book.book_name} />
+                            </div>
+                            <p className="similar__item__name">{book.book_name}</p>
+                            <div>
+                                <p className="d-inline similar__item__stars">
+                                    {/* <i className="icomoon icomoon-star"></i>
                                         <i className="icomoon icomoon-star"></i>
                                         <i className="icomoon icomoon-star"></i>
                                         <i className="icomoon icomoon-star"></i>
                                         <i className="icomoon icomoon-star"></i>
                                         <span className="number">(386 đánh giá)</span> */}
-                                {renderRating(book)}
+                                    {renderRating(book)}
+                                </p>
+                            </div>
+                            <p className="price">
+                                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(book.book_sale)}
+                                <span span className="percent " > -{Math.round((1 - 1.0 * book.book_sale / book.book_price) * 100)} %</span>
+                                <span className="original ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(book.book_price)}</span>
                             </p>
-                        </div>
-                        <p className="price">
-                            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(book.book_sale)}
-                            <span span className="percent " > -{Math.round((1 - 1.0 * book.book_sale / book.book_price) * 100)} %</span>
-                            <span className="original ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(book.book_price)}</span>
-                        </p>
-                    </div >
-                </a>
+                        </div >
+                    </a>
 
-            </div >
-
+                </div >
+            </>
         )
     });
 

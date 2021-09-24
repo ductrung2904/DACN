@@ -12,6 +12,7 @@ import EvaluateRating from '../components/Detail/EvaluateRating';
 import EvaluateImages from '../components/Detail/EvaluateImages';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDetail } from '../api/productApi';
+import { Helmet } from 'react-helmet';
 
 function ProductDetail() {
     const { id, metatitle } = useParams();
@@ -30,6 +31,9 @@ function ProductDetail() {
 
             {selectBook && (
                 <>
+                    <Helmet>
+                        <title>{selectBook.book_name}</title>
+                    </Helmet>
                     <BreadCrumb cat_name={selectBook.cat_name} book_name={selectBook.book_name} />
                     <div className="container" key={selectBook.book_id}>
                         {isLoading && <div>Đang đợi phản hồi từ backend...</div>}

@@ -14,7 +14,7 @@ function App() {
       <Header />
       <Router>
         <Switch>
-          <Route exact path="/" component={HomePage} title="Tiki - Mua hàng online giá tốt, hàng chuẩn, ship nhanh" />
+          <Route exact path="/" component={HomePage} />
           <Route path="/nha-sach-tiki/:id/:metatitle" component={ProductDetail} />
           <Route path="/checkout/cart" component={Cart} />
           <Route path="/checkout/shipping" component={Shipping} />

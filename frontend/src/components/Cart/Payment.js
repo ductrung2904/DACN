@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOrderDetail } from '../../api/orderApi';
 import { resetOrder } from '../../features/paymentSlice';
+import { Helmet } from 'react-helmet';
 
 function Payment() {
     const cart = useSelector((state) => state.cart);
@@ -25,6 +26,9 @@ function Payment() {
     }, [isSuccess, dispatch]);
     return (
         <>
+            <Helmet>
+                <title>Thanh toán và đặt mua</title>
+            </Helmet>
             <header className="shipping__header">
                 <div className="container">
                     <div className="progress">
