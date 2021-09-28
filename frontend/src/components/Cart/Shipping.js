@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { getUserInfo } from '../../api/userApi';
-import { saveShippingAddress } from '../../features/shippingSlice';
+import { saveShippingAddress } from '../../features/cartSlice';
 import { Helmet } from 'react-helmet';
 
 function Shipping() {

@@ -69,4 +69,115 @@ router.get("/book/:id/:metatitle", async (req, res) => {
     }
 });
 
+// get all category
+router.get("/category", async (req, res) => {
+    try {
+        // const results = await db.query("SELECT * FROM book");
+        const results = await db.query("SELECT * FROM category");
+        res.status(200).json({
+            status: "success",
+            results: results.rows.length,
+            data: {
+                category: results.rows,
+            },
+        });
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+// get book by cat_id
+router.get("/category/:id", async (req, res) => {
+    try {
+        // const results = await db.query("SELECT * FROM book");
+        const results = await db.query(
+            "SELECT * FROM category ct, book b Where ct.cat_id = b.cat_id AND ct.cat_id = $1",
+            [req.params.id]
+        );
+        res.status(200).json({
+            status: "success",
+            results: results.rows.length,
+            data: {
+                category: results.rows,
+            },
+        });
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+// get all company
+router.get("/company", async (req, res) => {
+    try {
+        // const results = await db.query("SELECT * FROM book");
+        const results = await db.query("SELECT * FROM company");
+        res.status(200).json({
+            status: "success",
+            results: results.rows.length,
+            data: {
+                company: results.rows,
+            },
+        });
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+// get book by com_id
+router.get("/company/:id", async (req, res) => {
+    try {
+        // const results = await db.query("SELECT * FROM book");
+        const results = await db.query(
+            "SELECT * FROM company c, book b Where c.com_id = b.com_id AND c.com_id = $1",
+            [req.params.id]
+        );
+        res.status(200).json({
+            status: "success",
+            results: results.rows.length,
+            data: {
+                company: results.rows,
+            },
+        });
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+// get all shop
+router.get("/shop", async (req, res) => {
+    try {
+        // const results = await db.query("SELECT * FROM book");
+        const results = await db.query("SELECT * FROM shop");
+        res.status(200).json({
+            status: "success",
+            results: results.rows.length,
+            data: {
+                shop: results.rows,
+            },
+        });
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+// get book by shop_id
+router.get("/shop/:id", async (req, res) => {
+    try {
+        // const results = await db.query("SELECT * FROM book");
+        const results = await db.query(
+            "SELECT * FROM shop s, book b Where s.shop_id = b.shop_id AND s.shop_id = $1",
+            [req.params.id]
+        );
+        res.status(200).json({
+            status: "success",
+            results: results.rows.length,
+            data: {
+                shop: results.rows,
+            },
+        });
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 module.exports = router;

@@ -3,15 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const paymentSlice = createSlice({
     name: 'payment',
     initialState: {
-        paymentDetail: [],
+        paymentDetail: {},
         isSuccess: false,
         error: "",
     },
     reducers: {
-        createOrderDetailSuccess: (state, action) => {
+        createOrderDetailSuccess: (state, { payload }) => {
             state.error = "";
             state.isSuccess = true;
-            state.paymentDetail = action.payload;
+            state.paymentDetail = payload;
         },
         createOrderFail: (state, { payload }) => {
             state.error = payload;

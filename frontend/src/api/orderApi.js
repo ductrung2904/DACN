@@ -8,13 +8,11 @@ const orderApi = {
     },
 }
 
-export const getOrderDetail = (frmData) => async (dispatch) => {
+export const getOrderDetail = (order) => async (dispatch) => {
     try {
-        const orderDetail = await orderApi.order(frmData);
-        if (orderDetail.data.status === "success") {
-            dispatch(createOrderDetailSuccess(orderDetail.data));
-            localStorage.removeItem('cartItems')
-        }
+        const orderDetail = await orderApi.order(order);
+        dispatch(createOrderDetailSuccess(orderDetail.data.data.orders));
+        localStorage.removeItem('cartItems')
     } catch (error) {
         dispatch(createOrderFail());
     }

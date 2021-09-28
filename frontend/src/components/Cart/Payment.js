@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 
 function Payment() {
     const cart = useSelector((state) => state.cart);
-    const shipping = useSelector((state) => state.shipping);
+    // const shipping = useSelector((state) => state.shipping);
     const { isSuccess } = useSelector((state) => state.payment);
 
     const dispatch = useDispatch();
@@ -14,8 +14,18 @@ function Payment() {
     const handlePlaceOrder = () => {
         dispatch(getOrderDetail({
             // ...shipping, ...cart,
-            paymentDetail: [shipping.shippingInfo.username, shipping.shippingInfo.phone, shipping.shippingInfo.address, shipping.shippingInfo.email, shipping.shippingInfo.require, cart.cartItems.book_id, cart.cartTotalQuantity, cart.cartTotalAmount]
+            // paymentDetail: [shipping.shippingInfo.username, shipping.shippingInfo.phone, shipping.shippingInfo.address, shipping.shippingInfo.email, shipping.shippingInfo.require, cart.cartItems.book_id, cart.cartTotalQuantity, cart.cartTotalAmount]
             // paymentDetail: { ...shipping, ...cart }
+            // [shipping.shippingInfo.username, shipping.shippingInfo.phone, shipping.shippingInfo.address, shipping.shippingInfo.email, shipping.shippingInfo.require, cart.cartItems.book_id, cart.cartTotalQuantity, cart.cartTotalAmount]
+            // username: cart.shippingInfo.username,
+            // phone: cart.shippingInfo.phone,
+            // address: cart.shippingInfo.address,
+            // email: cart.shippingInfo.email,
+            // require: cart.shippingInfo.require,
+            // book_id: cart.cartItems[0].book_id,
+            // quantity: cart.cartTotalQuantity,
+            // price: cart.cartTotalAmount
+            ...cart, paymentDetail: cart.cartItems.book_id
         }));
     }
     useEffect(() => {
@@ -95,9 +105,9 @@ function Payment() {
                                 <a href="/checkout/shipping">Sửa</a>
                             </div>
                             <div className="address">
-                                <span className="shipping__address__name">{shipping.shippingInfo.name}</span>
-                                <span className="shipping__address__street">Địa chỉ: {shipping.shippingInfo.address}</span>
-                                <span className="shipping__address__phone">Điện thoại: {shipping.shippingInfo.phone}</span>
+                                <span className="shipping__address__name">{cart.shippingInfo.name}</span>
+                                <span className="shipping__address__street">Địa chỉ: {cart.shippingInfo.address}</span>
+                                <span className="shipping__address__phone">Điện thoại: {cart.shippingInfo.phone}</span>
                             </div>
                         </div>
                         <div className="payment-total-prices__inner">

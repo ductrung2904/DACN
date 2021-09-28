@@ -5,6 +5,7 @@ import cart from '../features/cartSlice';
 import login from '../features/loginSlice';
 import shipping from '../features/shippingSlice';
 import payment from '../features/paymentSlice';
+import filter from '../features/filterSlice';
 import { persistReducer } from 'redux-persist';
 import storage from "redux-persist/lib/storage";
 
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     cart,
     login,
     shipping,
-    payment
+    payment,
+    filter
 });
 
 export default persistReducer(persistConfig, rootReducer);
