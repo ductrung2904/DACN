@@ -3,7 +3,6 @@ import shortItem from '../features/shortItemSlice';
 import currentBook from '../features/bookDetailSlice';
 import cart from '../features/cartSlice';
 import login from '../features/loginSlice';
-import shipping from '../features/shippingSlice';
 import payment from '../features/paymentSlice';
 import filter from '../features/filterSlice';
 import { persistReducer } from 'redux-persist';
@@ -20,7 +19,6 @@ const rootReducer = combineReducers({
     currentBook,
     cart,
     login,
-    shipping,
     payment,
     filter
 });

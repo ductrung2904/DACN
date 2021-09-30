@@ -102,7 +102,7 @@ SET datestyle = "ISO, DMY";
 insert into EMPLOYEE values ('admin','admin', 'Bùi Nguyễn Đức Trung', '0987654321', 'Củ Chi',0);
 
 insert into CUSTOMER(cus_usr, cus_pwd, cus_name, cus_phone, cus_address, cus_email, cus_gender) values 
-('bndtrung', 'bndtrung', 'Bùi Nguyễn Đức Trung', '0987654321', 'Củ Chi', 'bndtrung@gmail.com', '1'),
+('bndtrung', 'bndtrung', 'Bùi Nguyễn Đức Trung', '0987654321', 'Ấp Tân tiến, xã Tân Thông Hội, huyện Củ Chi', 'bndtrung@gmail.com', '1'),
 ('dqlai', 'dqlai', 'Đặng Quốc Lai', '0772960922', '613/44/32/11 quốc lộ 13, khu phố 4, hiệp bình phước, thủ đức, tp.hcm', 'dqlai@gmail.com', '1'),
 ('mhvan', 'mhvan', 'Mai Hữu Văn', '0949376324', '222 Cô Bắc Q.1', 'mhvan@gmail.com', '1'),	
 ('dqviet', 'dqviet', 'Đỗ Quốc Việt', '0932158413', '48 Hồ Biểu Chánh, P.11, Q.Phú Nhuận', 'dqviet@gmail.com', '1'),

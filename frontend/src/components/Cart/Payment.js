@@ -6,27 +6,23 @@ import { Helmet } from 'react-helmet';
 
 function Payment() {
     const cart = useSelector((state) => state.cart);
-    // const shipping = useSelector((state) => state.shipping);
     const { isSuccess } = useSelector((state) => state.payment);
 
     const dispatch = useDispatch();
 
+    const order = {
+        username: cart.shippingInfo.username,
+        phone: cart.shippingInfo.phone,
+        address: cart.shippingInfo.address,
+        email: cart.shippingInfo.email,
+        require: cart.shippingInfo.require,
+        book_id: cart.cartItems.book_id,
+        quantity: cart.cartTotalQuantity,
+        price: cart.cartTotalAmount
+    }
+
     const handlePlaceOrder = () => {
-        dispatch(getOrderDetail({
-            // ...shipping, ...cart,
-            // paymentDetail: [shipping.shippingInfo.username, shipping.shippingInfo.phone, shipping.shippingInfo.address, shipping.shippingInfo.email, shipping.shippingInfo.require, cart.cartItems.book_id, cart.cartTotalQuantity, cart.cartTotalAmount]
-            // paymentDetail: { ...shipping, ...cart }
-            // [shipping.shippingInfo.username, shipping.shippingInfo.phone, shipping.shippingInfo.address, shipping.shippingInfo.email, shipping.shippingInfo.require, cart.cartItems.book_id, cart.cartTotalQuantity, cart.cartTotalAmount]
-            // username: cart.shippingInfo.username,
-            // phone: cart.shippingInfo.phone,
-            // address: cart.shippingInfo.address,
-            // email: cart.shippingInfo.email,
-            // require: cart.shippingInfo.require,
-            // book_id: cart.cartItems[0].book_id,
-            // quantity: cart.cartTotalQuantity,
-            // price: cart.cartTotalAmount
-            ...cart, paymentDetail: cart.cartItems.book_id
-        }));
+        dispatch(getOrderDetail(order));
     }
     useEffect(() => {
         if (isSuccess) {

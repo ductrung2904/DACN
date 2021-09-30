@@ -79,13 +79,6 @@ function ProductDetailCenter({ aut_id, aut_name, eva_count, eva_rating, book_nam
                     nhận hàng để được dự báo thời gian chi phí giao hàng một cách chính xác nhất.
                 </div>
 
-                <p>Số lượng</p>
-                <div className="book__quantity d-flex">
-                    <div className="abate "></div>
-                    <div className="number">1</div>
-                    <div className="augment"></div>
-                </div>
-
                 <button className="btn btn-add-to-cart" onClick={() => handleAddToCart(add)}>Chọn mua</button>
             </div>
         </>

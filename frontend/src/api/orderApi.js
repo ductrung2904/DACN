@@ -8,9 +8,9 @@ const orderApi = {
     },
 }
 
-export const getOrderDetail = (order) => async (dispatch) => {
+export const getOrderDetail = (username, phone, address, email, require, book_id, quantity, price) => async (dispatch) => {
     try {
-        const orderDetail = await orderApi.order(order);
+        const orderDetail = await orderApi.order(username, phone, address, email, require, book_id, quantity, price);
         dispatch(createOrderDetailSuccess(orderDetail.data.data.orders));
         localStorage.removeItem('cartItems')
     } catch (error) {
