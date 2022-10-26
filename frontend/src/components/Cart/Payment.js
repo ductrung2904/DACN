@@ -1,35 +1,82 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getOrderDetail } from '../../api/orderApi';
-import { resetOrder } from '../../features/paymentSlice';
+import { useHistory } from 'react-router';
 import { Helmet } from 'react-helmet';
+import axios from '../../api/axiosClient';
+import { savePaymentDetail } from '../../features/paymentSlice';
 
 function Payment() {
-    const cart = useSelector((state) => state.cart);
-    const { isSuccess } = useSelector((state) => state.payment);
+    const { cart } = useSelector((state) => state.cart);
+    const { isAuth, userInfo } = useSelector(state => state.login);
+    const { orderId } = useSelector(state => state.payment);
 
+    const history = useHistory();
+    const userInfoLocal = JSON.parse(localStorage.getItem("shippingInfo"));
     const dispatch = useDispatch();
 
-    const order = {
-        username: cart.shippingInfo.username,
-        phone: cart.shippingInfo.phone,
-        address: cart.shippingInfo.address,
-        email: cart.shippingInfo.email,
-        require: cart.shippingInfo.require,
-        book_id: cart.cartItems.book_id,
-        quantity: cart.cartTotalQuantity,
-        price: cart.cartTotalAmount
-    }
+    useEffect(() => {
+        if (isAuth !== true) {
+            history.push("/")
+        }
+        else {
+            dispatch(
+                savePaymentDetail({
+                    username: userInfoLocal.cus_usr,
+                    name: userInfoLocal.cus_name,
+                    phone: userInfoLocal.cus_phone,
+                    email: userInfoLocal.cus_email,
+                    address: userInfoLocal.cus_address,
+                    require: userInfoLocal.ord_require,
+                    status: 1
+                })
+            );
+        }
+        // eslint-disable-next-line
+    }, []);
 
     const handlePlaceOrder = () => {
-        dispatch(getOrderDetail(order));
-    }
-    useEffect(() => {
-        if (isSuccess) {
-            dispatch(resetOrder());
-            alert("Đặt hàng thành công");
+        axios.post("/order/createOrder", {
+            username: userInfo.cus_usr,
+            orderCreatedDate: userInfo.ord_created_date,
+            phone: userInfo.cus_phone,
+            address: userInfo.cus_address,
+            email: userInfo.cus_email,
+            require: userInfo.ord_require,
+            bookId: cart[0].shippingInfo.book_id,
+            quantity: cart[0].shippingInfo.ord_quantity,
+            price: cart[0].shippingInfo.ord_price
+        })
+            .then((result) => {
+                dispatch({
+                    type: "payment/setOrderId",
+                    payload: {
+                        orderId: result.data[0].addOrder
+                    }
+                });
+                history.push("/");
+
+                alert("Đặt hàng thành công");
+            })
+            .catch((err) => {
+                console.log("Đặt hàng thất bại: " + err);
+            });
+        for (var i = 1; i < cart.length; i++) {
+            axios
+                .post("/order/addMore", {
+                    orderId: orderId,
+                    bookId: cart[i].shippingInfo.book_id,
+                    quantity: cart[i].shippingInfo.ord_quantity,
+                    price: cart[i].shippingInfo.ord_price
+                })
+                .then((result) => {
+                    console.log("Thêm đơn hàng thành công");
+                })
+                .catch((err) => {
+                    console.log("Đặt hàng thất bại" + err);
+                });
         }
-    }, [isSuccess, dispatch]);
+    }
+
     return (
         <>
             <Helmet>
@@ -135,7 +182,7 @@ function Payment() {
                             <button
                                 type="button"
                                 className="cart__submit"
-                                onClick={handlePlaceOrder}>
+                                onClick={() => handlePlaceOrder()}>
                                 Đặt mua
                             </button>
                         </div>

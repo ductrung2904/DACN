@@ -5,6 +5,7 @@ import { lstProductByCategory } from '../../api/filterApi';
 import Sidebar from '../HomePage/Sidebar';
 import StarRating from '../StarRating';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom'
 
 function FilterByCategory() {
     const { id } = useParams();
@@ -38,12 +39,12 @@ function FilterByCategory() {
                 <div className="container">
                     <Sidebar />
                     <section className="category__content">
-                        <h3 className="title">Kết quả tìm kiếm của {productByCategory.cat_id}</h3>
+                        <h3 className="title">Kết quả tìm kiếm</h3>
                         {productByCategory && productByCategory.map((productByCategory) => {
                             return (
                                 <span>
                                     <div className="category__product__items">
-                                        <a className="product__item" href={`/nha-sach-tiki/${productByCategory.book_id}/${productByCategory.book_metatitle}`} key={productByCategory.book_id}>
+                                        <Link className="product__item" to={`/nha-sach-tiki/${productByCategory.book_id}/${productByCategory.book_metatitle}`} key={productByCategory.book_id}>
                                             <div className="similar__item ">
                                                 <div className="text-center">
                                                     <img src={"https://salt.tikicdn.com/cache/280x280/ts/product/" + productByCategory.book_img + ".jpg"}
@@ -61,7 +62,7 @@ function FilterByCategory() {
                                                     <span className="original ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productByCategory.book_price)}</span>
                                                 </p>
                                             </div >
-                                        </a>
+                                        </Link>
                                     </div>
                                 </span>
                             )

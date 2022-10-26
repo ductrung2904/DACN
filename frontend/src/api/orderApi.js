@@ -3,7 +3,7 @@ import axiosClient from "./axiosClient";
 
 const orderApi = {
     order: () => {
-        const url = "/order";
+        const url = "/order/createOrder";
         return axiosClient.post(url);
     },
 }

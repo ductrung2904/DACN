@@ -1,7 +1,12 @@
-const { Pool } = require("pg");
+import pkg from 'pg';
+const { Pool } = pkg;
+import { database_url } from "../setting.js"
 
-const pool = new Pool();
+const databaseConfig = { connectionString: database_url };
+const pool = new Pool(databaseConfig);
 
-module.exports = {
-    query: (text, params) => pool.query(text, params),
-};
+export default pool
+
+// module.exports = {
+//     query: (text, params) => pool.query(text, params),
+// };

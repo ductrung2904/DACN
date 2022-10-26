@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBooks } from '../../api/productApi';
 import { Helmet } from 'react-helmet';
+import { Link } from "react-router-dom"
 
 function Main() {
     const [pageNumber, setPageNumber] = useState(0);
@@ -41,7 +42,7 @@ function Main() {
                 </Helmet>
                 <div className="category__product__items">
 
-                    <a className="product__item" href={`/nha-sach-tiki/${book.book_id}/${book.book_metatitle}`} key={book.book_id}>
+                    <Link className="product__item" to={`/nha-sach-tiki/${book.book_id}/${book.book_metatitle}`} key={book.book_id}>
                         <div className="similar__item ">
                             <div className="text-center">
                                 <img src={"https://salt.tikicdn.com/cache/280x280/ts/product/" + book.book_img + ".jpg"}
@@ -65,7 +66,7 @@ function Main() {
                                 <span className="original ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(book.book_price)}</span>
                             </p>
                         </div >
-                    </a>
+                    </Link>
 
                 </div >
             </>
@@ -76,7 +77,7 @@ function Main() {
 
     const changePage = ({ selected }) => {
         setPageNumber(selected);
-        window.scrollTo({ behavior: "smooth", top: 200 });
+        window.scrollTo({ behavior: "smooth", top: 190 });
     };
 
     return (

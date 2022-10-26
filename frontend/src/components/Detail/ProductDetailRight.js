@@ -1,19 +1,22 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-function ProductDetailRight({ shop_avatar, shop_name }) {
+function ProductDetailRight(props) {
+    const { item } = props;
+
     return (
         <div class="book__commitment d-inline-block align-top">
             <div class="book__commitment__top">
                 <div class="seller-info">
                     <div class="seller-description">Cam kết chính hiệu bởi</div>
                     <div class="seller-icon-and-name d-flex align-items-start">
-                        <img class="icon-store" src={"https://vcdn.tikicdn.com/cache/w88/ts/seller/" + shop_avatar} alt="" />
+                        <img class="icon-store" src={"https://vcdn.tikicdn.com/cache/w88/ts/seller/" + item.shop_avatar} alt="" />
                         <div>
-                            <a href="https://tiki.vn/cua-hang/tiki-trading" class="seller-name">
-                                <span>{shop_name}</span>
+                            <Link to="https://tiki.vn/cua-hang/tiki-trading" class="seller-name">
+                                <span>{item.shop_name}</span>
                                 <br />
                                 <span class="view-more">Xem Shop</span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -22,7 +25,7 @@ function ProductDetailRight({ shop_avatar, shop_name }) {
                         src="https://frontend.tikicdn.com/_desktop-next/static/img/icons/compensation.svg" alt="" />
                         <span>Hoàn tiền<br />
                             <b> 111% </b><br />
-                            <a href="https://drive.google.com/file/d/1po3r6qApp-q7JDB5kwGKujVtvInfO-ih/view" target="_blank" rel="noreferrer">nếu giả</a>
+                            <Link to="https://drive.google.com/file/d/1po3r6qApp-q7JDB5kwGKujVtvInfO-ih/view" target="_blank" rel="noreferrer">nếu giả</Link>
                         </span>
                     </div>
                     <div class="benefit-item guarantee">

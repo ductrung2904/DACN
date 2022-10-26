@@ -4,15 +4,17 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../../features/cartSlice';
 import { useHistory } from 'react-router-dom';
 
-function ProductDetailCenter({ aut_id, aut_name, eva_count, eva_rating, book_name, book_sale, book_price, add, key }) {
+function ProductDetailCenter(props) {
+    const { item } = props;
+
     const renderRating = () => {
-        if (!eva_count) {
+        if (!item.count) {
             return <span className="number">(0 đánh giá)</span>;
         }
         return (
             <>
-                <StarRating rating={eva_rating} />
-                <span className="number">({eva_count} đánh giá)</span>
+                <StarRating rating={item.eva_rating} />
+                <span className="number">({item.count} đánh giá)</span>
             </>
         );
     };
@@ -21,16 +23,16 @@ function ProductDetailCenter({ aut_id, aut_name, eva_count, eva_rating, book_nam
     const history = useHistory();
 
     const handleAddToCart = () => {
-        dispatch(addToCart(add));
+        dispatch(addToCart(item));
         history.push("/checkout/cart");
     };
 
     return (
         <>
-            <div className="book__header position-relative" key={key}>
+            <div className="book__header position-relative" key={item.book_id}>
                 <div className="brand">
                     <div className="brand-and-author cus-border-right d-inline">
-                        <h6>Tác giả:<a href={aut_id}>{aut_name}</a></h6>
+                        <h6>Tác giả:<a href={item.aut_id}>{item.aut_name}</a></h6>
                     </div>
                     <div className="like_share">
                         <div className="icon-wrap"><img
@@ -45,7 +47,7 @@ function ProductDetailCenter({ aut_id, aut_name, eva_count, eva_rating, book_nam
                     <img src="https://salt.tikicdn.com/ts/upload/e9/68/49/50ac83c9f95bd008cc840e638f0f5791.png"
                         alt="tikinow" className="cus-border-right" />
                     <div className="d-inline cus-border-right"></div>
-                    {book_name}
+                    {item.book_name}
                 </h1>
                 <div className="detail__item__stars">
                     {/* <p className='detail__rating d-inline'>
@@ -62,9 +64,9 @@ function ProductDetailCenter({ aut_id, aut_name, eva_count, eva_rating, book_nam
             <div className="book__right__content d-inline-block">
                 <div className="book__price">
                     <p>
-                        <span className="book__price__current ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(book_sale)}</span>
-                        <span className="book__price__old">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(book_price)}</span>
-                        <span className="book__price__discount">-{Math.round((1 - 1.0 * book_sale / book_price) * 100)} %</span>
+                        <span className="book__price__current ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.book_sale)}</span>
+                        <span className="book__price__old">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.book_price)}</span>
+                        <span className="book__price__discount">-{Math.round((1 - 1.0 * item.book_sale / item.book_price) * 100)} %</span>
                     </p>
                     <div className="book__price__viewmore d-flex">
                         <img className="tikicard__icon" src="https://salt.tikicdn.com/ts/upload/7b/17/f7/4860983e93ea3c264ae0d932c58ec4f7.png"
@@ -79,7 +81,7 @@ function ProductDetailCenter({ aut_id, aut_name, eva_count, eva_rating, book_nam
                     nhận hàng để được dự báo thời gian chi phí giao hàng một cách chính xác nhất.
                 </div>
 
-                <button className="btn btn-add-to-cart" onClick={() => handleAddToCart(add)}>Chọn mua</button>
+                <button className="btn btn-add-to-cart" onClick={() => handleAddToCart(item)}>Chọn mua</button>
             </div>
         </>
     )

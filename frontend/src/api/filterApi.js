@@ -3,32 +3,32 @@ import axiosClient from "./axiosClient";
 
 const filterApi = {
     getAllCategory: () => {
-        const url = '/category';
+        const url = '/product/category';
         return axiosClient.get(url);
     },
 
     getProductByCategory: (id) => {
-        const url = `/category/${id}`;
+        const url = `/product/category/${id}`;
         return axiosClient.get(url);
     },
 
     getAllCompany: () => {
-        const url = '/company';
+        const url = '/product/company';
         return axiosClient.get(url);
     },
 
     getProductByCompany: (id) => {
-        const url = `/company/${id}`;
+        const url = `/product/company/${id}`;
         return axiosClient.get(url);
     },
 
     getAllShop: () => {
-        const url = '/shop';
+        const url = '/product/shop';
         return axiosClient.get(url);
     },
 
     getProductByShop: (id) => {
-        const url = `/shop/${id}`;
+        const url = `/product/shop/${id}`;
         return axiosClient.get(url);
     },
 }

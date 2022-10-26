@@ -3,8 +3,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import StarRating from '../StarRating';
+import { Link } from 'react-router-dom'
 
-function SameProductSlice({ same_products }) {
+function SameProductSlice(props) {
+    const { same_products } = props;
+
     const settings = {
         dots: false,
         infinite: true,
@@ -30,7 +33,7 @@ function SameProductSlice({ same_products }) {
             {same_products.map((sameproduct) => {
                 return (
                     <div className="similar__item">
-                        <a href={`/nha-sach-tiki/${sameproduct.book_id}/${sameproduct.book_metatitle}`} key={sameproduct.book_id}>
+                        <Link to={`/nha-sach-tiki/${sameproduct.book_id}/${sameproduct.book_metatitle}`} key={sameproduct.book_id}>
                             <div className="text-center">
                                 <img src={"https://salt.tikicdn.com/cache/280x280/ts/product/" + sameproduct.book_img + ".jpg"}
                                     alt={sameproduct.book_name} />
@@ -46,7 +49,7 @@ function SameProductSlice({ same_products }) {
                                 <span span className="percent " > -{Math.round((1 - 1.0 * sameproduct.book_sale / sameproduct.book_price) * 100)} %</span>
                                 <span className="original ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sameproduct.book_price)}</span>
                             </p>
-                        </a>
+                        </Link>
                     </div>
                 )
             })}

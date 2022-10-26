@@ -91,7 +91,7 @@ html {
 }
 
 .header .container {
-  padding: 20px 30px 16px;
+  padding: 20px 32px 16px;
   position: relative;
 }
 
@@ -171,6 +171,11 @@ html {
   font-size: 13px;
   vertical-align: middle;
 }
+
+.header__menu {
+  justify-content: flex-end;
+}
+
 .modal__btn-close {
   right: -12px;
   top: -15px;

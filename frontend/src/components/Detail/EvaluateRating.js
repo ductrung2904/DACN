@@ -1,22 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-function EvaluateRating({ eva_rate, eva_rating, eva_count, count }) {
-    const temp = [17, 10, 5, 4, 7];
-
-    for (var i = 5; i > 0; i--) {
-        temp.push(
-            <tr key={i}>
-                <td>{i}</td>
-                <td>
-                    <div className="progressbar__out">
-                        <div className="progressbar__in" style={{ width: 100.0 * temp[5 - i] / eva_count + "%" }}></div>
-                    </div>
-                </td>
-                <td><a href="."><b>{temp[5 - i]}</b> đánh giá</a></td>
-            </tr>
-        );
-    }
-
+function EvaluateRating({ eva_rating, eva_count, evaluateCount }) {
     return (
         <>
             <div className="evaluate__top">
@@ -27,7 +12,23 @@ function EvaluateRating({ eva_rate, eva_rating, eva_count, count }) {
                 <div className="rate-analyst">
                     <table className='w-100'>
                         <tbody>
-                            {temp}
+                            {evaluateCount.map((item, key) => (
+                                <tr key={key}>
+                                    <td>{5 - key}</td>
+                                    <td>
+                                        <div className="progressbar__out">
+                                            <div className="progressbar__in" style={{ width: 100.0 * (item.number / eva_count) + "%" }}></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {item.number ? (
+                                            <Link to="."><b>{item.number ? item.number : 0}</b> đánh giá</Link>
+                                        ) : (
+                                            <a href='.'> <b>{item.number ? item.number : 0}</b> đánh giá</a>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

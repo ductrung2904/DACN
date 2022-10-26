@@ -1,6 +1,8 @@
 import React from 'react'
 
-function BookDetail({ com_name, public_date, width, height, translator, cover_type, page_number }) {
+function BookDetail(props) {
+    const { item } = props;
+
     return (
         <>
             <div className="content has-table">
@@ -8,27 +10,27 @@ function BookDetail({ com_name, public_date, width, height, translator, cover_ty
                     <tbody>
                         <tr>
                             <td>Công ty phát hành</td>
-                            <td>{com_name}</td>
+                            <td>{item.com_name}</td>
                         </tr>
                         <tr>
                             <td>Ngày xuất bản</td>
-                            <td>{new Date(public_date).toLocaleDateString('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' })}</td>
+                            <td>{new Date(item.public_date).toLocaleDateString('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' })}</td>
                         </tr>
                         <tr>
                             <td>Kích thước</td>
-                            <td>{width} x {height} cm</td>
+                            <td>{item.width} x {item.height} cm</td>
                         </tr>
                         <tr>
                             <td>Dịch Giả</td>
-                            <td>{translator}</td>
+                            <td>{item.translator}</td>
                         </tr>
                         <tr>
                             <td>Loại bìa</td>
-                            <td>{cover_type}</td>
+                            <td>{item.cover_type}</td>
                         </tr>
                         <tr>
                             <td>Số trang</td>
-                            <td>{page_number}</td>
+                            <td>{item.page_number}</td>
                         </tr>
                     </tbody>
                 </table>

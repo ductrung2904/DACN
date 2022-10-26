@@ -4,18 +4,18 @@ import axiosClient from "./axiosClient";
 
 const userApi = {
     login: () => {
-        const url = '/login';
+        const url = '/user/login';
         return axiosClient.get(url);
     },
     user: (username) => {
-        const url = `/user/${username}`;
+        const url = `/user/user/${username}`;
         return axiosClient.get(url);
     }
 }
 
-const loginUrl = "http://localhost:5000/login";
+const loginUrl = "http://localhost:5000/user/login";
 
-const registerUrl = "http://localhost:5000/register";
+const registerUrl = "http://localhost:5000/user/register";
 
 export const userLogin = (frmData) => {
     return new Promise(async (resolve, reject) => {

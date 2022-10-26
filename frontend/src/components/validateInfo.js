@@ -23,7 +23,7 @@ export default function validateInfo(values) {
     if (!values.phone) {
         error.phone = "Bạn chưa nhập SĐT";
     }
-    else if (values.phone.length < 10 && values.phone.length < 10) {
+    else if (values.phone.length !== 10) {
         error.phone = "SĐT phải đúng 10 số";
     }
 

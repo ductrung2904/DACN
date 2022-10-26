@@ -4,12 +4,12 @@ import { loadingDetail, lstBookDetail, lstSameProduct, lstEvaluateImages, lstEva
 
 const productApi = {
     getAll: () => {
-        const url = '/book';
+        const url = '/product/book';
         return axiosClient.get(url);
     },
 
     getById: (id, metatitle) => {
-        const url = `/book/${id}/${metatitle}`;
+        const url = `/product/book/${id}/${metatitle}`;
         return axiosClient.get(url);
     },
 }

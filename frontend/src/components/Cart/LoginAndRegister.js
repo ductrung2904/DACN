@@ -85,7 +85,7 @@ function LoginAndRegister() {
     }
 
     return (
-        <div className="modal fade" id="modalDangNhap" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalDangNhap" aria-hidden="true">
+        <div className="modal fade" id="modalDangNhap" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="modalDangNhap" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div className="modal-content">
                     <div className="close" data-bs-dismiss="modal" aria-label="Close">
@@ -106,14 +106,14 @@ function LoginAndRegister() {
                                         </div>}
                                     <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                         <li className="nav-item" role="presentation">
-                                            <a className="nav-link active" id="pills-DangNhap-tab" data-bs-toggle="pill"
+                                            <button className="nav-link active" id="pills-DangNhap-tab" data-bs-toggle="pill"
                                                 href="#pills-DangNhap" role="tab" aria-controls="pills-DangNhap"
-                                                aria-selected="true">Đăng nhập</a>
+                                                aria-selected="true">Đăng nhập</button>
                                         </li>
                                         <li className="nav-item" role="presentation">
-                                            <a className="nav-link" id="pills-DangKy-tab" data-bs-toggle="pill"
+                                            <button className="nav-link" id="pills-DangKy-tab" data-bs-toggle="pill"
                                                 href="#pills-DangKy" role="tab" aria-controls="pills-DangKy"
-                                                aria-selected="false">Đăng ký</a>
+                                                aria-selected="false">Đăng ký</button>
                                         </li>
                                     </ul>
                                     <div className="tab-content" id="pills-tabContent">
@@ -133,7 +133,7 @@ function LoginAndRegister() {
                                                 />
                                             </div>
                                             <div className='labelinput'>
-                                                <label for="Password" className='lblInfo'>Mật khẩu</label>
+                                                <label htmlFor="Password" className='lblInfo'>Mật khẩu</label>
 
                                                 <input
                                                     type='password'
@@ -171,7 +171,7 @@ function LoginAndRegister() {
 
                                             <form className="needs-validation" onSubmit={handleRegisterOnSubmit}>
                                                 <div className='labelinput'>
-                                                    <label for="hoTen" className='lblInfo'>Họ tên</label>
+                                                    <label htmlFor="hoTen" className='lblInfo'>Họ tên</label>
                                                     <input
                                                         type='text'
                                                         placeholder="Nhập họ tên"
@@ -186,7 +186,7 @@ function LoginAndRegister() {
                                                 )}
 
                                                 <div className='labelinput'>
-                                                    <label for="txtUser" className='lblInfo'>Tên đăng nhập</label>
+                                                    <label htmlFor="txtUser" className='lblInfo'>Tên đăng nhập</label>
 
                                                     <input
                                                         type='text'
@@ -203,7 +203,7 @@ function LoginAndRegister() {
                                                 )}
 
                                                 <div className='labelinput'>
-                                                    <label for="txtPass" className='lblInfo'>Mật khẩu</label>
+                                                    <label htmlFor="txtPass" className='lblInfo'>Mật khẩu</label>
 
                                                     <input
                                                         type='password'
@@ -220,7 +220,7 @@ function LoginAndRegister() {
                                                 )}
 
                                                 <div className='labelinput'>
-                                                    <label for="txtPass" className='lblInfo'>Địa chỉ</label>
+                                                    <label htmlFor="txtPass" className='lblInfo'>Địa chỉ</label>
 
                                                     <input
                                                         type='text'
@@ -237,7 +237,7 @@ function LoginAndRegister() {
                                                 )}
 
                                                 <div className='labelinput'>
-                                                    <label for="dienThoai" className='lblInfo'>SĐT</label>
+                                                    <label htmlFor="dienThoai" className='lblInfo'>SĐT</label>
                                                     <input
                                                         type='number'
                                                         name="phone"
@@ -252,7 +252,7 @@ function LoginAndRegister() {
                                                 )}
 
                                                 <div className='labelinput'>
-                                                    <label for="email" className='lblInfo'>Email</label>
+                                                    <label htmlFor="email" className='lblInfo'>Email</label>
 
                                                     <input
                                                         type='email'
@@ -268,7 +268,7 @@ function LoginAndRegister() {
                                                 )}
 
                                                 <div className='labelinput'>
-                                                    <label for="gioiTinh" className='lblInfo'>Giới tính</label>
+                                                    <label htmlFor="gioiTinh" className='lblInfo'>Giới tính</label>
                                                     <div className="form-input">
                                                         <div className="form-check form-check-inline">
                                                             <input
@@ -278,6 +278,7 @@ function LoginAndRegister() {
                                                                 onChange={handleRegisterOnChange}
                                                                 id='male'
                                                                 className="form-check-input"
+                                                                checked="checked"
                                                             />
                                                             <label className="form-check-label" for="male">Nam</label>
                                                         </div>

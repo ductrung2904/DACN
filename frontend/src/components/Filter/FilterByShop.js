@@ -5,6 +5,7 @@ import { lstProductByShop } from '../../api/filterApi';
 import Sidebar from '../HomePage/Sidebar';
 import StarRating from '../StarRating';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom'
 
 function FilterByShop() {
     const { id } = useParams();
@@ -38,12 +39,12 @@ function FilterByShop() {
                 <div className="container">
                     <Sidebar />
                     <section className="category__content">
-                        <h3 className="title">Kết quả tìm kiếm của {productByShop.cat_id}</h3>
+                        <h3 className="title">Kết quả tìm kiếm</h3>
                         {productByShop && productByShop.map((productByShop) => {
                             return (
                                 <span>
                                     <div className="category__product__items">
-                                        <a className="product__item" href={`/nha-sach-tiki/${productByShop.book_id}/${productByShop.book_metatitle}`} key={productByShop.book_id}>
+                                        <Link className="product__item" to={`/nha-sach-tiki/${productByShop.book_id}/${productByShop.book_metatitle}`} key={productByShop.book_id}>
                                             <div className="similar__item ">
                                                 <div className="text-center">
                                                     <img src={"https://salt.tikicdn.com/cache/280x280/ts/product/" + productByShop.book_img + ".jpg"}
@@ -61,7 +62,7 @@ function FilterByShop() {
                                                     <span className="original ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productByShop.book_price)}</span>
                                                 </p>
                                             </div >
-                                        </a>
+                                        </Link>
                                     </div>
                                 </span>
                             )

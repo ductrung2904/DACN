@@ -4,14 +4,17 @@ import Cart from './CartIcon';
 import LoginAndRegister from '../Cart/LoginAndRegister';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../features/loginSlice';
+// import { useHistory } from 'react-router';
 
 function Header() {
     // const { userInfo } = useSelector(state => state.user);
+    // const history = useHistory();
     const dispatch = useDispatch();
     const { isAuth, userInfo } = useSelector(state => state.login);
     const logoutHandle = (e) => {
         e.preventDefault();
         dispatch(logout());
+        // history.push("/")
         return alert('Bạn đã đăng xuất');
     }
 
@@ -26,7 +29,7 @@ function Header() {
                                     <div className="col-6">
                                         <SearchBox />
                                     </div>
-                                    <div className="col-6 d-flex">
+                                    <div className="col-6 d-flex header__menu">
                                         <div className="header__user">
                                             <i className="tikicon icon-tracking"></i>
                                             <span>Theo dõi</span>

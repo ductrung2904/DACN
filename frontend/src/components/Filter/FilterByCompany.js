@@ -5,6 +5,7 @@ import { lstProductByCompany } from '../../api/filterApi';
 import Sidebar from '../HomePage/Sidebar';
 import StarRating from '../StarRating';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom'
 
 function FilterByCompany() {
     const { id } = useParams();
@@ -38,12 +39,12 @@ function FilterByCompany() {
                 <div className="container">
                     <Sidebar />
                     <section className="category__content">
-                        <h3 className="title">Kết quả tìm kiếm của {productByCompany.cat_id}</h3>
+                        <h3 className="title">Kết quả tìm kiếm</h3>
                         {productByCompany && productByCompany.map((productByCompany) => {
                             return (
                                 <span>
                                     <div className="category__product__items">
-                                        <a className="product__item" href={`/nha-sach-tiki/${productByCompany.book_id}/${productByCompany.book_metatitle}`} key={productByCompany.book_id}>
+                                        <Link className="product__item" to={`/nha-sach-tiki/${productByCompany.book_id}/${productByCompany.book_metatitle}`} key={productByCompany.book_id}>
                                             <div className="similar__item ">
                                                 <div className="text-center">
                                                     <img src={"https://salt.tikicdn.com/cache/280x280/ts/product/" + productByCompany.book_img + ".jpg"}
@@ -61,7 +62,7 @@ function FilterByCompany() {
                                                     <span className="original ">{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productByCompany.book_price)}</span>
                                                 </p>
                                             </div >
-                                        </a>
+                                        </Link>
                                     </div>
                                 </span>
                             )

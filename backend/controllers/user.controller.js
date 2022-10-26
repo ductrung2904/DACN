@@ -1,18 +1,17 @@
-const router = require("express").Router();
-const db = require("../db");
+import dbQuery from "../db/dbQuery.js"
 
 // Đăng ký tài khoản
-router.post("/register", async (req, res) => {
+export const register = async (req, res) => {
     const { username, password, name, phone, address, email, gender } = req.body;
 
     try {
-        const user = await db.query("SELECT * FROM customer WHERE cus_usr = $1", [username]);
+        const user = await dbQuery.query("SELECT * FROM customer WHERE cus_usr = $1", [username]);
 
         if (user.rows.length > 0) {
             return res.json({ status: "error", message: "Tên đăng nhập đã tồn tại" });
         }
 
-        let newUser = await db.query(
+        let newUser = await dbQuery.query(
             "INSERT INTO customer (cus_usr, cus_pwd, cus_name, cus_phone, cus_address, cus_email, cus_gender) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
             [username, password, name, phone, address, email, gender]
         );
@@ -22,14 +21,14 @@ router.post("/register", async (req, res) => {
         console.error(err.message);
         res.json({ status: "error", message: "Lỗi server" })
     }
-});
+}
 
 // Đăng nhập
-router.post("/login", async (req, res) => {
+export const login = async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        const user = await db.query("SELECT * FROM customer WHERE cus_usr = $1 and cus_pwd = $2", [username, password]);
+        const user = await dbQuery.query("SELECT * FROM customer WHERE cus_usr = $1 and cus_pwd = $2", [username, password]);
 
         if (user.rows.length === 0) {
             return res.status(401).json("Tài khoản hoặc mật khẩu không hợp lệ 1");
@@ -45,12 +44,12 @@ router.post("/login", async (req, res) => {
         console.error(err.message);
         res.status(500).send("Lỗi server");
     }
-});
+}
 
 // Lấy thông tin khách hàng
-router.get("/user/:username", async (req, res) => {
+export const getUser = async (req, res) => {
     try {
-        const results = await db.query(
+        const results = await dbQuery.query(
             "SELECT cus_usr, cus_name, cus_phone, cus_address, cus_email, cus_phone FROM customer WHERE cus_usr = $1",
             [req.params.username]
         );
@@ -64,6 +63,4 @@ router.get("/user/:username", async (req, res) => {
     } catch (err) {
         console.error(err.message);
     }
-});
-
-module.exports = router;
+}
