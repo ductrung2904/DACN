@@ -14,3 +14,8 @@
 - Giỏ hàng:
   - Lưu trữ sản phẩm khách hàng thêm vào (tự động tính tổng giá tiền theo số lượng)
   - Thanh toán đơn hàng
+
+### Công nghệ sử dụng:
+- Front-end: ReactJS, Redux, SCSS
+- Back-end: NodeJS, Express
+- Database: PostgreSQL
